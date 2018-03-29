@@ -1,3 +1,5 @@
+package normalizer;
+
 import java.util.ArrayList;
 
 //THIS IS THE TREE DATA STRUCTURE, IT CONTAINS DERIVEDWORD DATA

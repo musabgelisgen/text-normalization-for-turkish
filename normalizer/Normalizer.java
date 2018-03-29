@@ -1,3 +1,5 @@
+package normalizer;
+
 import java.util.ArrayList;
 
 public class Normalizer{

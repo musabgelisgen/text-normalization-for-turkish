@@ -17,6 +17,7 @@
 
 package normalizer;
 
+// IMPORTS
 import java.util.ArrayList;
 
 public class DerivedWord implements Comparable<DerivedWord>
@@ -49,12 +50,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 
 	// How many derivations from the original root word to this one?
 	int editDistance;
-
-	// Which derivations were made?
-	boolean derivedViaDeletion;
-	boolean derivedViaInsertion;
-	boolean derivedViaReplacement;
-	boolean derivedViaSwapping;
 
 	// More specific information about the nature of the derivations
 	int charactersDeleted;            // How many characters were deleted?
@@ -95,6 +90,24 @@ public class DerivedWord implements Comparable<DerivedWord>
 	 * METHODS
 	 */
 
+	public String toString()
+	{
+		return word.toString();
+	}
+
+	@Override
+	public int compareTo(DerivedWord word)
+	{
+		// Edit distance is priority
+		if (this.editDistance != word.editDistance)
+		{
+			return (this.editDistance - word.editDistance);
+		}
+
+		// Else lexicographic order is priority
+		return (this.word.compareTo(word.getWord()));
+	}
+
 	// GET DERIVATIONS
 
 	public static ArrayList<DerivedWord> getDerivations(DerivedWord word)
@@ -128,19 +141,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 		return getDerivations(new DerivedWord(word));
 	}
 
-	@Override
-	public int compareTo(DerivedWord word)
-	{
-		// Edit distance is priority
-		if (this.editDistance != word.editDistance)
-		{
-			return (this.editDistance - word.editDistance);
-		}
-
-		// Else lexicographic order is priority
-		return (this.word.compareTo(word.getWord()));
-	}
-
 	/*
 	 * DERIVATION METHODS
 	 */
@@ -166,7 +166,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 
 			// Change relevant derivation properties
 			temp.editDistance += 1;
-			temp.derivedViaDeletion = true;
 			temp.charactersDeleted += 1;
 
 			// Add to list
@@ -209,7 +208,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 
 				// Change relevant derivation properties
 				temp.editDistance += 1;
-				temp.derivedViaInsertion = true;
 				temp.charactersInserted += 1;
 
 				// Add to list
@@ -259,7 +257,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 
 				// Change relevant derivation properties
 				temp.editDistance += 1;
-				temp.derivedViaReplacement = true;
 				temp.characterReplacementDistance = getKeyDistance(root.getCharAt(i), charSet[j]);
 
 				// Add to list
@@ -306,7 +303,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 
 				// Change relevant derivation properties
 				temp.editDistance += 1;
-				temp.derivedViaSwapping = true;
 				temp.characterSwapDistance =
 						(temp.characterSwapDistance > (j - i)) ? temp.characterSwapDistance : (j - i);
 
@@ -335,11 +331,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 	private void setDefaults()
 	{
 		editDistance = 0;
-
-		derivedViaDeletion = false;
-		derivedViaInsertion = false;
-		derivedViaReplacement = false;
-		derivedViaSwapping = false;
 
 		charactersDeleted = 0;
 		charactersInserted = 0;
@@ -398,7 +389,7 @@ public class DerivedWord implements Comparable<DerivedWord>
 
 		// Calculating distance
 		distance = Math.abs(aRow - bRow) + Math.abs(aCol - bCol);
-		
+
 		// Return key distance
 		return distance;
 	}
@@ -414,17 +405,13 @@ public class DerivedWord implements Comparable<DerivedWord>
 
 	public double[] getDerivationProperties()
 	{
-		double[] properties = new double[9];
+		double[] properties = new double[5];
 
 		properties[0] = editDistance;
-		properties[1] = (derivedViaDeletion) ? 1 : 0;
-		properties[2] = (derivedViaInsertion) ? 1 : 0;
-		properties[3] = (derivedViaReplacement) ? 1 : 0;
-		properties[4] = (derivedViaSwapping) ? 1 : 0;
-		properties[5] = charactersDeleted;
-		properties[6] = charactersInserted;
-		properties[7] = characterReplacementDistance;
-		properties[8] = characterSwapDistance;
+		properties[1] = charactersDeleted;
+		properties[2] = charactersInserted;
+		properties[3] = characterReplacementDistance;
+		properties[4] = characterSwapDistance;
 
 		return properties;
 	}
@@ -432,26 +419,6 @@ public class DerivedWord implements Comparable<DerivedWord>
 	public int getEditDistance()
 	{
 		return editDistance;
-	}
-
-	public boolean getDerivedViaDeletion()
-	{
-		return derivedViaDeletion;
-	}
-
-	public boolean getDerivedViaInsertion()
-	{
-		return derivedViaInsertion;
-	}
-
-	public boolean getDerivedViaReplacement()
-	{
-		return derivedViaReplacement;
-	}
-
-	public boolean getDerivedViaSwapping()
-	{
-		return derivedViaSwapping;
 	}
 
 	public int getCharactersDeleted()

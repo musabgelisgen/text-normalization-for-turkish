@@ -1,4 +1,5 @@
 # text-normalization-for-turkish
+# ***Currently Work In Progress***
 Text Normalization for Turkish by a group of Bilkent University CS students.
 
 Contributors:

@@ -30,7 +30,7 @@ public class WebScrap {
 		// Method 2 - Filters Zargan Turkish word database and retrieves the frequencies
 		// of given words
 		// Connection con = getConnection();
-		BufferedReader br = new BufferedReader(new FileReader("/Users/kuluhan/Desktop/project/Kullanım sıklığı/word_forms_stems_and_frequencies_full.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("/Users/kuluhan/Desktop/project/Kullanım sıklığı/word_forms_stems_and_frequencies_full.txt"));
 		String line = "";
 		double[] arr = new double[1337897];
 		long sum = 0;
@@ -49,7 +49,7 @@ public class WebScrap {
 		System.out.println(calculateSD(arr));
 
 		br = new BufferedReader(new FileReader(
-				"/Users/kuluhan/Desktop/project/Kullanım sıklığı/word_forms_stems_and_frequencies_full.txt"));
+				"/Users/kuluhan/Desktop/project/Kullanım sıklığı/word_forms_stems_and_frequencies_full.txt"));
 		for (int i = 0; i < 7; i++) {
 			line = br.readLine();
 		}

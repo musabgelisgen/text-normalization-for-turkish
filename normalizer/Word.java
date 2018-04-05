@@ -53,6 +53,11 @@ public class Word implements Comparable<Word>
 
 	// Functional methods
 
+	public String toString()
+	{
+		return word;
+	}
+
 	/**
 	 * Implementation of the Comparable interface
 	 *

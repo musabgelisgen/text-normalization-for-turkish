@@ -6,4 +6,4 @@ Contributors:
 - Kuluhan Binici (kulubinici@hotmail.com)
 - Mert Alp Taytak (mertalptaytak@gmail.com)
 - Ahmet Avcı (ahmetabdullahavci07@gmail.com)
-- Musab Gelişgen
+- Musab Gelişgen (mgelisgen@gmail.com)
